@@ -5,6 +5,7 @@
 
 using namespace std;
 
+// Topping class
 class Topping {
     public: 
         vector<string> toppings;
@@ -44,7 +45,6 @@ class IceCream {
 class IceCreamCone : public IceCream {
     public:
         string type;
-        string getType();
         IceCreamCone(string type, string flavor) : IceCream(flavor) {}
         ~IceCreamCone(){}
 
@@ -63,15 +63,10 @@ class IceCreamCone : public IceCream {
         }
 };
 
-string IceCreamCone::getType() {
-    return type;
-};
-
 // Derived class
 class IceCreamCup : public IceCream {
     public:
         string type;
-        string getType();
         IceCreamCup(string type, string flavor) : IceCream(flavor) {}
         ~IceCreamCup(){}
 
@@ -90,10 +85,7 @@ class IceCreamCup : public IceCream {
         }
 };
 
-string IceCreamCup::getType() {
-    return type;
-};
-
+// Main
 int main() {
         vector<IceCream*> IceCreamList;
         vector<IceCream*> :: iterator it;
