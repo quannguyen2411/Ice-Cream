@@ -49,7 +49,7 @@ class IceCreamCone : public IceCream {
         ~IceCreamCone(){}
 
         void addTopping(string topping) {
-          if (topping.compare("banana")) {
+          if (topping.compare("banana") == 0) {
             cout << "Sorry... Cannot add banana to a cone.\n";
           }
           else {
@@ -76,7 +76,7 @@ class IceCreamCup : public IceCream {
         ~IceCreamCup(){}
 
         void addTopping(string topping) {
-          if (topping.compare("bonnet")) {
+          if (topping.compare("bonnet") == 0) {
             cout << "Sorry... Cannot add bonnet to a cup.\n";
           }
           else {
