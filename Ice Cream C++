@@ -1,0 +1,131 @@
+#include <iostream>
+#include<string>
+#include<vector>
+#include<iterator>
+
+using namespace std;
+
+class Topping {
+    public: 
+        vector<string> toppings;
+
+        void addTopping(string topping) {
+          toppings.push_back(topping);
+        }
+
+        void display() {
+          for (int i = 0; i < toppings.size(); i++) {
+            cout << toppings[i] << "\n";
+          }
+        }
+};
+
+// Base class
+class IceCream {
+    public:
+        string flavor;
+        Topping toppingInstance;  
+
+        IceCream(string flavor) {
+          this->flavor = flavor;
+        }
+
+        virtual ~IceCream(){}
+        virtual void addTopping(string topping) {
+          toppingInstance.addTopping(topping);
+        }
+        virtual void display() {
+          cout << flavor << " with ";
+          toppingInstance.display();
+        }
+};
+
+// Derived class
+class IceCreamCone : public IceCream {
+    public:
+        string type;
+        string getType();
+        IceCreamCone(string type, string flavor) : IceCream(flavor) {}
+        ~IceCreamCone(){}
+
+        void addTopping(string topping) {
+          if (topping.compare("banana")) {
+            cout << "Sorry... Cannot add banana to a cone.\n";
+          }
+          else {
+            IceCream::addTopping(topping);
+          }
+  }
+
+        void display() {
+          cout << "My cone is: ";
+          IceCream::display();
+        }
+};
+
+string IceCreamCone::getType() {
+    return type;
+};
+
+// Derived class
+class IceCreamCup : public IceCream {
+    public:
+        string type;
+        string getType();
+        IceCreamCup(string type, string flavor) : IceCream(flavor) {}
+        ~IceCreamCup(){}
+
+        void addTopping(string topping) {
+          if (topping.compare("bonnet")) {
+            cout << "Sorry... Cannot add bonnet to a cup.\n";
+          }
+          else {
+            IceCream::addTopping(topping);
+          }
+        }
+
+        void display() {
+          cout << "\nMy cup is: ";
+          IceCream::display();
+        }
+};
+
+string IceCreamCup::getType() {
+    return type;
+};
+
+int main() {
+        vector<IceCream*> IceCreamList;
+        vector<IceCream*> :: iterator it;
+
+        IceCream *cone1 = new IceCreamCone("cone", "vanilla");
+        IceCream *cone2 = new IceCreamCone("cone", "coffee");
+        IceCream *cup1 = new IceCreamCup("cup", "chocolate");
+
+        IceCreamCone *cone3 = new IceCreamCone("cone", "blueberry");
+        IceCreamCup *cup2 = new IceCreamCup("cup", "matcha");
+        IceCreamCup *cup3 = new IceCreamCup("cup", "coconut"); 
+
+        cone1->addTopping("banana");
+        cone1->addTopping("hot fudge");
+        cone2->addTopping("caramel syrup");
+        cup1->addTopping("bonnet");
+        cup1->addTopping("sprinkles");
+        cone3->addTopping("almond");
+        cup2->addTopping("green tea powder");
+        cup3->addTopping("walnut crumble");
+        cup3->addTopping(" and ground cinnamon");
+
+        IceCreamList.push_back(cone1);
+        IceCreamList.push_back(cone2);
+        IceCreamList.push_back(cup1);
+        IceCreamList.push_back(cone3);
+        IceCreamList.push_back(cup2);
+        IceCreamList.push_back(cup3);
+
+        for (it = IceCreamList.begin(); it!= IceCreamList.end(); it++) {
+          (*it)->display();
+          delete *it;
+        }
+        return 0;
+}
